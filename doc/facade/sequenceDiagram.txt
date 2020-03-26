@@ -1,0 +1,4 @@
+@startuml
+Facade -> Bank : GetCredit
+Bank -> CreditHistory : CheckCreditHystory
+@enduml

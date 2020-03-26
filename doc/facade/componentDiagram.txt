@@ -1,0 +1,9 @@
+@startuml
+package "BankSystem"{
+    [bank]
+    [creditHistory]
+}
+[facade]
+facade --> bank
+bank --> creditHistory
+@enduml
