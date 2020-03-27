@@ -8,7 +8,6 @@ import (
 
 type Bank interface {
 	GetPercentForCredit() float32
-	//GiveCredit(creditHistory bool) (float32, bool)
 }
 
 type bank struct {
@@ -23,7 +22,7 @@ func (b *bank) GetPercentForCredit() float32 {
 		tmp     float32
 	)
 	if b.desireCredit <= b.lastCredit {
-		tmp = float32(b.lastCredit / b.desireCredit)
+		tmp := float32(b.lastCredit / b.desireCredit)
 		percent = tmp * 0.007
 		if percent <= 0.055 {
 			percent = 0.055
@@ -44,9 +43,12 @@ func (b *bank) GetPercentForCredit() float32 {
 
 func NewBank(desireCredit uint) Bank {
 	rand.Seed(time.Now().UnixNano())
-	a := rand.Intn(10000)
-	b := rand.Intn(1000000000)
-	lastCredit := uint(math.Abs(float64(b - a)))
+	minLastCr := rand.Intn(10000)
+	maxLastCr := rand.Intn(1000000000)
+	lastCredit := uint(math.Abs(float64(maxLastCr - minLastCr)))
+	if desireCredit == 0 {
+		desireCredit += 1
+	}
 	return &bank{
 		desireCredit: desireCredit,
 		lastCredit:   lastCredit,

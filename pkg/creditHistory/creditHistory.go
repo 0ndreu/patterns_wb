@@ -2,6 +2,7 @@ package creditHistory
 
 import (
 	"math/rand"
+	"patterns_wb/pkg/models/facade"
 	"time"
 )
 
@@ -28,7 +29,7 @@ func NewCreditHistory() CreditHistory {
 	rand.Seed(time.Now().UnixNano())
 	countOfCredits := rand.Intn(20)
 	return &creditHistory{
-		lastCredit:     true,
+		lastCredit:     models.LastCredit,
 		countOfCredits: countOfCredits,
 	}
 }
