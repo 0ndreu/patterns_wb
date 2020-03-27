@@ -12,6 +12,7 @@ type CreditHistory interface {
 	CheckCreditHistory() bool
 }
 
+// Interface to start work with facade
 type Credit interface {
 	GiveCredit(string, CreditHistory, Bank)
 }
@@ -21,7 +22,7 @@ type credit struct {
 	creditHist CreditHistory
 }
 
-// percent for credit and credit approval status
+// Percent for credit and credit approval status
 func (c *credit) getCredit(ch CreditHistory, b Bank) (float32, bool) {
 	approval := ch.CheckCreditHistory()
 	var percentForCredit float32
@@ -31,11 +32,7 @@ func (c *credit) getCredit(ch CreditHistory, b Bank) (float32, bool) {
 	return percentForCredit, approval
 }
 
-func (c *credit) GiveCredit(user string, ch CreditHistory, b Bank) {
-	percent, isApprove := c.getCredit(ch, b)
-	c.returnInfo(user, isApprove, percent)
-}
-
+// Print info about credit approval and percentage
 func (c *credit) returnInfo(name string, isApprove bool, percent float32) {
 	fmt.Println("Dear", name)
 	if isApprove {
@@ -45,6 +42,13 @@ func (c *credit) returnInfo(name string, isApprove bool, percent float32) {
 	}
 }
 
+// Entry point to facade
+func (c *credit) GiveCredit(user string, ch CreditHistory, b Bank) {
+	percent, isApprove := c.getCredit(ch, b)
+	c.returnInfo(user, isApprove, percent)
+}
+
+// NewCredit instance
 func NewCredit() Credit {
 	return &credit{
 		bank:       nil,

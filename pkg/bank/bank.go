@@ -6,6 +6,7 @@ import (
 	"time"
 )
 
+// Bank calculates the percentage of credit
 type Bank interface {
 	GetPercentForCredit() float32
 }
@@ -41,6 +42,7 @@ func (b *bank) GetPercentForCredit() float32 {
 	return percent
 }
 
+// NewBank instance
 func NewBank(desireCredit uint) Bank {
 	rand.Seed(time.Now().UnixNano())
 	minLastCr := rand.Intn(10000)

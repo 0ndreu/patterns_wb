@@ -2,10 +2,12 @@ package creditHistory
 
 import (
 	"math/rand"
-	"patterns_wb/pkg/models/facade"
 	"time"
+
+	"patterns_wb/pkg/models/facade"
 )
 
+// CreditHistory checks last credit status and history
 type CreditHistory interface {
 	CheckCreditHistory() bool
 }
@@ -15,7 +17,7 @@ type creditHistory struct {
 	countOfCredits int
 }
 
-// check history and approval
+// Check history and approval
 func (ch *creditHistory) CheckCreditHistory() bool {
 	rand.Seed(time.Now().UnixNano())
 	chanceOfCredit := rand.Intn(30)
@@ -25,6 +27,7 @@ func (ch *creditHistory) CheckCreditHistory() bool {
 	return false
 }
 
+// NewCreditHistory instance
 func NewCreditHistory() CreditHistory {
 	rand.Seed(time.Now().UnixNano())
 	countOfCredits := rand.Intn(20)
