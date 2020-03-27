@@ -1,9 +1,17 @@
 @startuml
-package "BankSystem"{
-    [bank]
-    [creditHistory]
+package "Bank" {
+    ()bank
+    [GetPercentForCredit]
+}
+
+package "CreditHistory" {
+    ()credit
+    [CheckCreditHistory]
 }
 [facade]
 facade --> bank
-bank --> creditHistory
+bank - [GetPercentForCredit]
+
+facade --> credit
+credit - [CheckCreditHistory]
 @enduml

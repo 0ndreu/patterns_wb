@@ -1,35 +1,37 @@
 package bank
 
-type Balance interface {
-	getPercentForCredit()
-	GiveCredit(creditHistory bool) (float32, bool)
+import (
+	"math"
+	"math/rand"
+	"time"
+)
+
+type Bank interface {
+	GetPercentForCredit() float32
+	//GiveCredit(creditHistory bool) (float32, bool)
 }
 
-// percent for credit and credit approval status
-func GiveCredit(creditHistory bool) (float32, bool) {
-	var percentForCredit float32
-	if creditHistory == true {
-		percentForCredit = getPercentForCredit()
-	}
-	return percentForCredit, creditHistory
+type bank struct {
+	desireCredit uint
+	lastCredit   uint
 }
 
 // size of percent per month for credit
-func getPercentForCredit() float32 {
+func (b *bank) GetPercentForCredit() float32 {
 	var (
 		percent float32
 		tmp     float32
 	)
-	if desireCredit <= lastCredit {
-		tmp = lastCredit / desireCredit
-		percent = tmp * 0.07
+	if b.desireCredit <= b.lastCredit {
+		tmp = float32(b.lastCredit / b.desireCredit)
+		percent = tmp * 0.007
 		if percent <= 0.055 {
 			percent = 0.055
-		} else if percent >= 0.65 {
-			percent = 0.65
+		} else if percent >= 0.08 {
+			percent = 0.065
 		}
 	} else {
-		tpm = desireCredit / lastCredit
+		tmp = float32(b.desireCredit / b.lastCredit)
 		percent = tmp * 0.05
 		if percent <= 0.07 {
 			percent = 0.07
@@ -38,4 +40,15 @@ func getPercentForCredit() float32 {
 		}
 	}
 	return percent
+}
+
+func NewBank(desireCredit uint) Bank {
+	rand.Seed(time.Now().UnixNano())
+	a := rand.Intn(10000)
+	b := rand.Intn(1000000000)
+	lastCredit := uint(math.Abs(float64(b - a)))
+	return &bank{
+		desireCredit: desireCredit,
+		lastCredit:   lastCredit,
+	}
 }

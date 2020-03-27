@@ -1,4 +1,4 @@
 @startuml
-Facade -> Bank : GetCredit
-Bank -> CreditHistory : CheckCreditHystory
+Facade -> Bank : GetPercentForCredit
+Facade -> CreditHistory : CheckCreditHistory
 @enduml
