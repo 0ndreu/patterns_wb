@@ -1,6 +1,7 @@
 package bank
 
 import (
+	"fmt"
 	"math"
 	"math/rand"
 	"time"
@@ -9,6 +10,7 @@ import (
 // Bank calculates the percentage of credit
 type Bank interface {
 	GetPercentForCredit() float32
+	BankLastCredit(time time.Time)
 }
 
 type bank struct {
@@ -16,12 +18,10 @@ type bank struct {
 	lastCredit   uint
 }
 
-// size of percent per month for credit
-func (b *bank) GetPercentForCredit() float32 {
-	var (
-		percent float32
-		tmp     float32
-	)
+// GetPercentForCredit calculate size of percent per month for credit
+func (b *bank) GetPercentForCredit() (percent float32) {
+	var tmp float32
+
 	if b.desireCredit <= b.lastCredit {
 		tmp := float32(b.lastCredit / b.desireCredit)
 		percent = tmp * 0.007
@@ -39,20 +39,25 @@ func (b *bank) GetPercentForCredit() float32 {
 			percent = 0.1
 		}
 	}
-	return percent
+	return
+}
+
+// BankLastCredit sets sum of last credit
+func (b *bank) BankLastCredit(time time.Time) {
+	rand.Seed(time.Unix())
+	minLastCr := rand.Intn(10000)
+	maxLastCr := rand.Intn(1000000000)
+	b.lastCredit = uint(math.Abs(float64(maxLastCr - minLastCr)))
 }
 
 // NewBank instance
-func NewBank(desireCredit uint) Bank {
-	rand.Seed(time.Now().UnixNano())
-	minLastCr := rand.Intn(10000)
-	maxLastCr := rand.Intn(1000000000)
-	lastCredit := uint(math.Abs(float64(maxLastCr - minLastCr)))
+func NewBank(desireCredit uint) (Bank, error) {
 	if desireCredit == 0 {
-		desireCredit += 1
+		err := fmt.Errorf("you can't take zero credit")
+		return nil, err
 	}
 	return &bank{
 		desireCredit: desireCredit,
-		lastCredit:   lastCredit,
-	}
+		lastCredit:   0,
+	}, nil
 }

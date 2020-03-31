@@ -14,4 +14,5 @@ bank - [GetPercentForCredit]
 
 facade --> credit
 credit - [CheckCreditHistory]
+[Client] -- facade
 @enduml
