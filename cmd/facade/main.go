@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"time"
 
-	"patterns-wb/pkg/facade/bank"
-	"patterns-wb/pkg/facade/credithistory"
-	"patterns-wb/pkg/facade/facade"
+	"github.com/0ndreu/patterns-wb/pkg/facade/bank"
+	"github.com/0ndreu/patterns-wb/pkg/facade/credithistory"
+	"github.com/0ndreu/patterns-wb/pkg/facade/facade"
 )
 
 func main() {

@@ -5,9 +5,9 @@ import (
 	"testing"
 	"time"
 
-	"patterns-wb/pkg/facade/bank"
-	"patterns-wb/pkg/facade/credithistory"
-	"patterns-wb/pkg/facade/facade"
+	"github.com/0ndreu/patterns-wb/pkg/facade/bank"
+	"github.com/0ndreu/patterns-wb/pkg/facade/credithistory"
+	"github.com/0ndreu/patterns-wb/pkg/facade/facade"
 )
 
 var okResult = `Dear Petrov
@@ -18,7 +18,7 @@ func TestOk(t *testing.T) {
 	name := "Petrov"
 	sum = 500000
 	time := time.Date(2009, 11, 17, 20, 34, 58, 651387237, time.UTC)
-	ch := creditHistory.NewCreditHistory()
+	ch := credithistory.NewCreditHistory()
 	ch.CountOfCredits(time)
 	b, err := bank.NewBank(sum)
 	if err != nil {
@@ -28,6 +28,10 @@ func TestOk(t *testing.T) {
 	b.BankLastCredit(time)
 	credit := facade.NewCredit(b, ch)
 	out := credit.GiveCredit(name, ch, b, time)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
 	if out != okResult {
 		t.Errorf(out)
 	}
@@ -37,7 +41,7 @@ func TestZeroSum(t *testing.T) {
 	var sum uint
 	sum = 0
 	time := time.Date(2009, 11, 17, 20, 34, 58, 651387237, time.UTC)
-	ch := creditHistory.NewCreditHistory()
+	ch := credithistory.NewCreditHistory()
 	ch.CountOfCredits(time)
 	_, err := bank.NewBank(sum)
 	if err != nil {

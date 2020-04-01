@@ -4,7 +4,7 @@ import (
 	"math/rand"
 	"time"
 
-	"patterns-wb/pkg/facade/models/facade"
+	"github.com/0ndreu/patterns-wb/pkg/facade/models/facade"
 )
 
 // CreditHistory checks last credit status and history
