@@ -14,17 +14,16 @@ type rectangle struct {
 	height float64
 }
 
-// Accept ???????
-func (c *rectangle) Accept() float64 {
-	return c.area.AreaForRectangle(c.length, c.height)
+func (c *rectangle) Accept() (res float64) {
+	res = c.area.AreaForRectangle(c.length, c.height)
+	return
 }
 
 // NewCircle instance
 func NewCircle(area area, length float64, height float64) Rectangle {
 	return &rectangle{
-		area: area,
-		length:length,
-		height:height,
+		area:   area,
+		length: length,
+		height: height,
 	}
 }
-

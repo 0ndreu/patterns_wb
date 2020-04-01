@@ -13,15 +13,15 @@ type circle struct {
 	radius float64
 }
 
-// Accept ???????
-func (c *circle) Accept() float64 {
-	return c.area.AreaForCircle(c.radius)
+func (c *circle) Accept() (res float64) {
+	res = c.area.AreaForCircle(c.radius)
+	return
 }
 
 // NewCircle instance
 func NewCircle(area area, radius float64) Circle {
 	return &circle{
-		area: area,
-		radius:radius,
+		area:   area,
+		radius: radius,
 	}
 }

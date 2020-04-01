@@ -2,10 +2,11 @@ package main
 
 import (
 	"fmt"
-	"patterns-wb/pkg/visitor/areacalculator"
-	"patterns-wb/pkg/visitor/circle"
-	"patterns-wb/pkg/visitor/rectangle"
-	"patterns-wb/pkg/visitor/visitor"
+
+	"github.com/0ndreu/patterns-wb/pkg/visitor/areacalculator"
+	"github.com/0ndreu/patterns-wb/pkg/visitor/circle"
+	"github.com/0ndreu/patterns-wb/pkg/visitor/rectangle"
+	"github.com/0ndreu/patterns-wb/pkg/visitor/visitor"
 )
 
 func main() {
