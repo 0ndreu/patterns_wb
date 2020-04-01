@@ -18,7 +18,7 @@ func (v *visitor) Accept() (res float64) {
 	return
 }
 
-//NewVisitor instance
+// NewVisitor instance
 func NewVisitor(c Area) Visitor {
 	return &visitor{area: c}
 }

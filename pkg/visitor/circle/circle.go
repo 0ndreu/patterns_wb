@@ -13,6 +13,7 @@ type circle struct {
 	radius float64
 }
 
+// Accept return area of the circle
 func (c *circle) Accept() (res float64) {
 	res = c.area.AreaForCircle(c.radius)
 	return

@@ -14,6 +14,7 @@ type rectangle struct {
 	height float64
 }
 
+// Accept return area of rectangle
 func (c *rectangle) Accept() (res float64) {
 	res = c.area.AreaForRectangle(c.length, c.height)
 	return
