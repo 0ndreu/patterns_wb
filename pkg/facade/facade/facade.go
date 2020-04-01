@@ -15,7 +15,7 @@ type creditHistory interface {
 
 // Interface to start work with facade
 type Credit interface {
-	GiveCredit(string, creditHistory, bank, time.Time) string
+	GiveCredit(string, creditHistory, bank, time.Time) (string, error)
 }
 
 type credit struct {
@@ -25,10 +25,14 @@ type credit struct {
 
 
 // GiveCredit is entry point to facade
-func (c *credit) GiveCredit(user string, ch creditHistory, b bank, g time.Time) (out string) {
-	percent, isApprove := c.getCredit(ch, b, g)
-	out = c.returnInfo(user, isApprove, percent)
-	return
+func (c *credit) GiveCredit(user string, ch creditHistory, b bank, g time.Time) (out string, err error) {
+	if user != ""{
+		percent, isApprove := c.getCredit(ch, b, g)
+		out = c.returnInfo(user, isApprove, percent)
+		return
+	}
+	err = fmt.Errorf("null name")
+	return "", nil
 }
 
 // getCredit calculate percent for credit and credit approval status

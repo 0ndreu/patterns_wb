@@ -23,6 +23,10 @@ func main() {
 	}
 	b.BankLastCredit(time)
 	credit := facade.NewCredit(b, ch)
-	out := credit.GiveCredit(name, ch, b, time)
+	out, err := credit.GiveCredit(name, ch, b, time)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
 	fmt.Println(out)
 }
