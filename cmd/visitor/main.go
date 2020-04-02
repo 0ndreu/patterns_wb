@@ -11,13 +11,23 @@ import (
 
 func main() {
 	area := areacalculator.NewArea()
-	circle := circle.NewCircle(area, 3)
-	vis := visitor.NewVisitor(circle)
-	a := vis.Accept()
-	fmt.Println(a)
-	rect := rectangle.NewCircle(area, 8, 10)
-	vis = visitor.NewVisitor(rect)
-	res := vis.Accept()
-	fmt.Println(res)
+	circle, err := circle.NewCircle(area, 5)
+	if err != nil {
+		fmt.Println(err)
+		return
+	} else {
+		visCircle := visitor.NewVisitor(circle)
+		a := visCircle.Accept()
+		fmt.Println(a)
+	}
+	rect, err := rectangle.NewRectangle(area, 8, 10)
+	if err != nil {
+		fmt.Println(err)
+		return
+	} else {
+		visRect := visitor.NewVisitor(rect)
+		res := visRect.Accept()
+		fmt.Println(res)
+	}
 
 }

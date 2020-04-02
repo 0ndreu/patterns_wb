@@ -1,5 +1,7 @@
 package circle
 
+import "fmt"
+
 type area interface {
 	AreaForCircle(radius float64) (res float64)
 }
@@ -20,9 +22,15 @@ func (c *circle) Accept() (res float64) {
 }
 
 // NewCircle instance
-func NewCircle(area area, radius float64) Circle {
-	return &circle{
-		area:   area,
-		radius: radius,
+func NewCircle(area area, radius float64) (c Circle, err error) {
+	if radius > 0 {
+		c = &circle{
+			area:   area,
+			radius: radius,
+		}
+		return
 	}
+	err = fmt.Errorf("there is no circle")
+	c = nil
+	return
 }
